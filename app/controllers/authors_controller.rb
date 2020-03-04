@@ -6,11 +6,11 @@ class AuthorsController < ApplicationController
   def new
     @author = Author.new
   end
-
+  
   def create
     @author = Author.create(author_params)
-
-    redirect_to author_path(@author)
+    binding.pry
+    @author.valid? ? (redirect_to author_path(@author)) : (render 'new')
   end
 
   private
