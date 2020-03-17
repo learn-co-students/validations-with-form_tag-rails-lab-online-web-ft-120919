@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   def show
+    # binding.pry
     @post = Post.find(params[:id])
   end
 
@@ -9,10 +10,13 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-
     @post.update(post_params)
+    if @post.invalid?
+      render :edit
+    else
+      redirect_to post_path(@post)
+      end
 
-    redirect_to post_path(@post)
   end
 
   private
